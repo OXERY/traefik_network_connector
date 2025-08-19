@@ -22,7 +22,7 @@ logLevel:
   # General logging level for all libraries etc
   general: "INFO"
   # This application specific logging level
-  application: "DEBUG"
+  application: "INFO"
 
 # Traefik Specific Configuration
 traefik:
