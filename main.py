@@ -6,10 +6,6 @@ import re
 # Initialize the cache for container details
 container_cache = {}
 
-# Pre-compile traefik label regex
-MONITORED_LABEL_PATTERN = re.compile(config.traefik.monitoredLabel)
-
-
 # Function to initialize Docker client, potentially with TLS
 def create_docker_client(config):
     """
@@ -250,7 +246,7 @@ def monitor_events():
 
         # Manage creation and destruction events for containers with the monitored label, excluding the bridge network
         # Use the pre-compiled regular expression to check the monitored label in the container's labels
-        elif any(MONITORED_LABEL_PATTERN.match(label) for label in container.labels):
+        else:
             if event["Action"] == "start":
                 app_logger.info(f"Container {container.name} is being created. Attempting to connect Traefik to relevant networks.")
                 connect_traefik_to_network(container)
